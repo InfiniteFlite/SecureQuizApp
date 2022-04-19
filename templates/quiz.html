@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% set active_page = "quiz" %}
+
+{% block title %}Quiz{% endblock %}
+
+{% block content %}
+<form action="/quiz">
+    <div class="form-group">
+      <label for="question">{{ Question }}</label>
+      <input type="text" class="form-control" placeholder="Answer" id="question" name="Question">
+    </div>
+    <button type="submit" id="subButton" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% set active_page = "home" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center">Welcome to the US History quiz site. Press below to begin the quiz!</h1>
+
+<a href="/quiz">
+<button type="button" class="btn btn-large btn-primary" action="/quiz">Begin!</button>
+</a>
+{% endblock %}
