@@ -13,36 +13,41 @@ questions = {
 
 answers = ["George Washington", "13", "Alaska"]
 
-questionOn = 0
-
 def processQuiz(answer):
     questionOn+= 1
     if questionOn == 1:
         return questions[questionOn]
     elif 1 < questionOn < 4:
-        session["Answer"+questionOn] = answer
+        session["Answer"+str(questionOn)] = answer
     else:
-        points = checkAnswers()
-    return
+        checkAnswers()
+    return questions[questionOn]
 
 def checkAnswers():
     points = 0
 
     for x in range(1,4):
-        if session["Answer"+x]==answers[x-1]:
+        if session["Answer"+str(x)]==answers[x-1]:
             points+=1
-    return points
+    return
 
 @app.route("/")
 def render_main():
     session.clear()
+    session["questionOn"] = 0
+    session["points"] = 0
     return render_template("home.html")
 
 @app.route("/quiz")
 def render_quiz():
-    answer = request.form["Question"]
-    q = processQuiz(answer)
-    return render_template("quiz.html", Question = q)
+    if session["questionOn"] > 0:
+        answer = request.args["Question"]
+        processQuiz(answer)
+        q = session["questionOn"]
+    else:
+        q = 1
+        session["questionOn"] = 1
+    return render_template("quiz.html", Question = questions[q])
 
 if __name__=="__main__":
     app.run(debug=True)
