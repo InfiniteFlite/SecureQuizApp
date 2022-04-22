@@ -5,7 +5,7 @@
 {% block title %}Quiz{% endblock %}
 
 {% block content %}
-<form action="/quiz">
+<form action="/quiz" method = "post">
     <div class="form-group">
       <label for="question">{{ Question }}</label>
       <input type="text" class="form-control" placeholder="Answer" id="question" name="Question">
